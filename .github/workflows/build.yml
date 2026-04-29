@@ -10,10 +10,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Compile Typst
+      - name: Install fonts
+        run: |
+          sudo apt-get install -y \
+            fonts-noto-cjk \
+            fonts-noto-mono
+
+      - name: Setup Typst
         uses: typst-community/setup-typst@v4
 
-      - run: typst compile main.typ main.pdf
+      - name: Compile
+        run: typst compile main.typ main.pdf
 
       - name: Commit PDF
         run: |
